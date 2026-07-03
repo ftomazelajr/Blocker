@@ -53,7 +53,15 @@ class BlockerAccessibilityService : AccessibilityService() {
                      text.contains("desinstalar") ||
                      text.contains("uninstall") ||
                      text.contains("forçar parada") ||
-                     text.contains("force stop"))
+                     text.contains("force stop") ||
+                     text.contains("administrador") ||
+                     text.contains("admin") ||
+                     text.contains("desativar") ||
+                     text.contains("deactivate") ||
+                     text.contains("remover ativação") ||
+                     text.contains("gerenciar apps") ||
+                     text.contains("informações do app") ||
+                     text.contains("app info"))
 
             if (touchesBlockerSettings) {
                 performGlobalAction(GLOBAL_ACTION_HOME)
