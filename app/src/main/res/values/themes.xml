@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.Blocker" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+    <style name="Theme.Blocker.Blocked" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>
