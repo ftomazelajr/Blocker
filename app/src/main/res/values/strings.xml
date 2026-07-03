@@ -28,73 +28,33 @@
     <string name="unlock_wrong_pin">Senha incorreta</string>
 </resources>
 EOF.
-cat > app/src/main/AndroidManifest.xml << 'EOF'
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+cat > app/src/main/res/values/strings.xml << 'EOF'
+<resources>
+    <string name="app_name">Blocker</string>
+    <string name="accessibility_service_description">Monitora apps e sites para bloquear conteúdo adulto instantaneamente.</string>
+    <string name="status_active">Proteção ATIVA</string>
+    <string name="status_inactive">Proteção INATIVA — toque abaixo para ativar</string>
+    <string name="streak_format">%d dias limpo</string>
+    <string name="block_count_format">%d bloqueios realizados</string>
+    <string name="btn_enable_accessibility">Ativar serviço de bloqueio</string>
+    <string name="btn_enable_admin">Ativar proteção contra desinstalação</string>
+    <string name="admin_explanation">Impede desativação rápida por impulso.</string>
+    <string name="admin_disable_warning">Tem certeza? Pense antes de desativar sua proteção.</string>
+    <string name="admin_enabled">Proteção contra desinstalação ativada</string>
+    <string name="blocked_message">Conteúdo bloqueado.\n\nRespire. Isso passa em alguns minutos.</string>
+    <string name="btn_close">Voltar</string>
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions"
-        xmlns:tools="http://schemas.android.com/tools" />
+    <string name="setup_pin_title">Crie uma senha para proteger o Blocker</string>
+    <string name="hint_pin_new">Nova senha (mín. 4 dígitos)</string>
+    <string name="hint_pin_confirm">Confirme a senha</string>
+    <string name="btn_save_pin">Salvar senha</string>
+    <string name="pin_too_short">A senha precisa ter pelo menos 4 dígitos</string>
+    <string name="pin_mismatch">As senhas não coincidem</string>
+    <string name="pin_saved">Senha salva</string>
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Blocker"
-        android:supportsRtl="true">
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".BlockedOverlayActivity"
-            android:exported="false"
-            android:launchMode="singleInstance"
-            android:excludeFromRecents="true"
-            android:theme="@style/Theme.Blocker.Blocked" />
-
-        <activity
-            android:name=".SetupPinActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Blocker" />
-
-        <activity
-            android:name=".UnlockActivity"
-            android:exported="false"
-            android:launchMode="singleInstance"
-            android:excludeFromRecents="true"
-            android:theme="@style/Theme.Blocker" />
-
-        <service
-            android:name=".BlockerAccessibilityService"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
-            </intent-filter>
-            <meta-data
-                android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_service_config" />
-        </service>
-
-        <receiver
-            android:name=".AdminReceiver"
-            android:permission="android.permission.BIND_DEVICE_ADMIN"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.device_admin"
-                android:resource="@xml/device_admin" />
-            <intent-filter>
-                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
-            </intent-filter>
-        </receiver>
-
-    </application>
-</manifest>
+    <string name="hint_pin">Digite sua senha</string>
+    <string name="btn_confirm">Confirmar</string>
+    <string name="unlock_info">Digite sua senha para desativar ou desinstalar o Blocker</string>
+    <string name="unlock_success">Liberado por 3 minutos</string>
+    <string name="unlock_wrong_pin">Senha incorreta</string>
+</resources>
