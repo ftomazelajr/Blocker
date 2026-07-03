@@ -26,6 +26,7 @@
     <string name="unlock_info">Digite sua senha para desativar ou desinstalar o Blocker</string>
     <string name="unlock_success">Liberado por 3 minutos</string>
     <string name="unlock_wrong_pin">Senha incorreta</string>
-    <string name="unlock_pending_format">Pedido de desbloqueio em andamento.\n\nFalta %d h %d min para liberar.</string>
+    <string name="unlock_pending_format" formatted="false">Pedido de desbloqueio em andamento.\n\nFalta %d h %d min para liberar.</string>
     <string name="unlock_request_created">Pedido registrado. Volte em 24 horas para concluir o desbloqueio.</string>
-</resources>
+</resources>o
+

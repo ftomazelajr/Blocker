@@ -10,8 +10,10 @@ object PrefsManager {
     private const val KEY_BLOCK_COUNT = "block_count"
     private const val KEY_PIN_HASH = "pin_hash"
     private const val KEY_UNLOCK_UNTIL = "unlock_until"
+    private const val KEY_UNLOCK_REQUEST_TIME = "unlock_request_time"
 
     private const val UNLOCK_WINDOW_MS = 3 * 60 * 1000L
+    private const val UNLOCK_DELAY_MS = 24 * 60 * 60 * 1000L
 
     private fun prefs(ctx: Context) =
         ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -66,5 +68,31 @@ object PrefsManager {
     fun isUnlocked(ctx: Context): Boolean {
         val until = prefs(ctx).getLong(KEY_UNLOCK_UNTIL, 0L)
         return System.currentTimeMillis() < until
+    }
+
+    fun requestUnlock(ctx: Context) {
+        prefs(ctx).edit()
+            .putLong(KEY_UNLOCK_REQUEST_TIME, System.currentTimeMillis())
+            .apply()
+    }
+
+    fun hasUnlockRequestPending(ctx: Context): Boolean =
+        prefs(ctx).contains(KEY_UNLOCK_REQUEST_TIME) && !isUnlockRequestReady(ctx)
+
+    fun isUnlockRequestReady(ctx: Context): Boolean {
+        val requested = prefs(ctx).getLong(KEY_UNLOCK_REQUEST_TIME, 0L)
+        if (requested == 0L) return false
+        return System.currentTimeMillis() - requested >= UNLOCK_DELAY_MS
+    }
+
+    fun getUnlockRequestRemainingMs(ctx: Context): Long {
+        val requested = prefs(ctx).getLong(KEY_UNLOCK_REQUEST_TIME, 0L)
+        if (requested == 0L) return 0L
+        val elapsed = System.currentTimeMillis() - requested
+        return (UNLOCK_DELAY_MS - elapsed).coerceAtLeast(0L)
+    }
+
+    fun clearUnlockRequest(ctx: Context) {
+        prefs(ctx).edit().remove(KEY_UNLOCK_REQUEST_TIME).apply()
     }
 }
