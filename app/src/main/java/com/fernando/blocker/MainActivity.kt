@@ -16,6 +16,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         PrefsManager.init(applicationContext)
 
+        if (!PrefsManager.hasPin(this)) {
+            startActivity(Intent(this, SetupPinActivity::class.java))
+        }
+
         findViewById<Button>(R.id.btnEnableAccessibility).setOnClickListener {
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
